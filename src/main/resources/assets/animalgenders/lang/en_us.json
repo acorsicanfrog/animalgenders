@@ -1,0 +1,13 @@
+{
+  "itemGroup.animalgenders": "Example Mod Tab",
+  "block.animalgenders.example_block": "Example Block",
+  "item.animalgenders.example_item": "Example Item",
+
+  "animalgenders.configuration.title": "Animal Genders Configs",
+  "animalgenders.configuration.section.animalgenders.common.toml": "Animal Genders Configs",
+  "animalgenders.configuration.section.animalgenders.common.toml.title": "Animal Genders Configs",
+  "animalgenders.configuration.items": "Item List",
+  "animalgenders.configuration.logDirtBlock": "Log Dirt Block",
+  "animalgenders.configuration.magicNumberIntroduction": "Magic Number Text",
+  "animalgenders.configuration.magicNumber": "Magic Number"
+}

@@ -1,0 +1,33 @@
+# Gradle
+.gradle/
+build/
+
+# IDE - IntelliJ
+.idea/
+*.iml
+out/
+
+# IDE - Eclipse
+bin/
+.settings/
+.metadata/
+.classpath
+.project
+
+# VSCode
+.vscode/
+
+# NeoForge runtime folders
+run/
+runs/
+run-data/
+
+# Logs & crashes
+logs/
+*.log
+hs_err_pid*
+replay_pid*
+
+# OS files
+.DS_Store
+Thumbs.db
