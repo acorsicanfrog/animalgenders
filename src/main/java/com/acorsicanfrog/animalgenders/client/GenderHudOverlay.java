@@ -3,10 +3,7 @@ package com.acorsicanfrog.animalgenders.client;
 import com.acorsicanfrog.animalgenders.AnimalGendersMod;
 import com.acorsicanfrog.animalgenders.Gender;
 import com.acorsicanfrog.animalgenders.attachment.GenderAttachment;
-
 import com.mojang.blaze3d.systems.RenderSystem;
-// import org.slf4j.Logger;
-// import org.slf4j.LoggerFactory;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
@@ -26,7 +23,6 @@ import net.neoforged.fml.common.EventBusSubscriber;
  */
 @EventBusSubscriber(modid = AnimalGendersMod.MOD_ID)
 public class GenderHudOverlay {
-	// private static final Logger LOGGER = LoggerFactory.getLogger(AnimalGendersMod.MOD_ID);
 
 	private static final ResourceLocation MALE_TEX = ResourceLocation.fromNamespaceAndPath(AnimalGendersMod.MOD_ID,
 			"textures/gui/gender_male.png");
@@ -38,9 +34,10 @@ public class GenderHudOverlay {
 	@SubscribeEvent
 	public static void onRenderOverlay(final net.neoforged.neoforge.client.event.RenderGuiEvent.Post event) {
 		Minecraft mc = Minecraft.getInstance();
+		var player = mc.player;
 
 		// Don't render while a screen is open (inventory, chat, etc.)
-		if (mc.player == null || mc.level == null || mc.screen != null)
+		if (player == null || mc.level == null || mc.screen != null)
 			return;
 
 		Entity target = resolveTarget(mc);
@@ -59,7 +56,8 @@ public class GenderHudOverlay {
 		int screenW = mc.getWindow().getGuiScaledWidth();
 		int screenH = mc.getWindow().getGuiScaledHeight();
 
-		double distance = mc.player.distanceTo(target);
+		double distance = player.distanceTo(target);
+		
 		// Push the icon higher above the crosshair as the entity gets further away
 		int yOffset = 40 + (int) Math.min(40, distance * 2.0);
 
@@ -81,8 +79,6 @@ public class GenderHudOverlay {
 
 		// Draw gender label to the right of the icon, vertically centred on it
 		gui.drawString(mc.font, net.minecraft.network.chat.Component.translatable(g.getTranslationKey()), x + ICON_SIZE + 4, y + (ICON_SIZE - mc.font.lineHeight) / 2, 0xFFFFFF);
-
-		// LOGGER.debug("GenderHudOverlay: rendered {} icon at ({}, {})", g, x, y);
 	}
 
 	/**

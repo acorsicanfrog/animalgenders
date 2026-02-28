@@ -5,6 +5,7 @@ import com.acorsicanfrog.animalgenders.Gender;
 import com.acorsicanfrog.animalgenders.attachment.GenderAttachment;
 
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.Bee;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
@@ -20,6 +21,8 @@ public class SpawnEvents
 
 				// Only care about animals
 				if (!(event.getEntity() instanceof Animal animal)) return;
+
+				if (animal instanceof Bee) return; // Bees are insects and should not have any gender
 
 				// Don't overwrite existing gender (e.g. chunk reloads)
 				if (GenderAttachment.hasGender(animal)) return;
