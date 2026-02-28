@@ -42,22 +42,26 @@ logoFile="assets/${mod_id}/logo.png" #optional
 #credits="" #optional
 
 # The authors of the mod, displayed in the mod UI (optional)
-authors="Angry Frog"
+authors="A Corsican Frog"
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-This mod adds genders to all animals: MALE or FEMALE.
+Adds Gender to All Minecraft Animals
 
-Mating is allowed only between two different genders (male / female).
+Introduces male and female genders for all animals.
 
-Milking / egg laying can only be done from female individuals.
+Breeding now respects gender: only male + female pairings are possible.
 
-This mod should be compatible with any animal mod.
+Female animals have exclusive abilities:
+- Laying eggs (chickens)
+- Being milked (cows)
+
+Designed to be compatible with most animal mods. If you encounter issues, I’ll work to fix them!
 '''
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.
-#[[mixins]]
-#config="${mod_id}.mixins.json"
+[[mixins]]
+config="mixins.animalgenders.json"
 
 # The [[accessTransformers]] block allows you to declare where your AT file is.
 # If this block is omitted, a fallback attempt will be made to load an AT from META-INF/accesstransformer.cfg

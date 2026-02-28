@@ -1,13 +1,13 @@
-# Animal Genders
+**Adds Gender to All Minecraft Animals**
 
-Adds male/female genders to all minecraft animals.
+Introduces male and female genders for all animals.
 
-Mating between animals is now restricted by their gender: male + female only.
+Breeding now respects gender: only male + female pairings are possible.
 
-Female animals will get the exclusivity to:
-- laying eggs (chickens)
-- being milked (cows)
+Female animals have exclusive abilities:
+- Laying eggs (chickens)
+- Being milked (cows)
 
-Should be compatible with every animal mod. If not, please let me know and I'll fix!
+Designed to be compatible with most animal mods. If you encounter issues, I’ll work to fix them!
 
 Modrinth: https://modrinth.com/project/animal-genders

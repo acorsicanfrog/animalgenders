@@ -1,0 +1,6 @@
+{
+  "gender.animalgenders.male": "Самец",
+  "gender.animalgenders.female": "Самка",
+  "gender.animalgenders.unknown": "Неизвестно",
+  "message.animalgenders.milking_male_impossible": "Доение невозможно у самцов."
+}

@@ -1,0 +1,6 @@
+{
+  "gender.animalgenders.male": "雄性",
+  "gender.animalgenders.female": "雌性",
+  "gender.animalgenders.unknown": "未知",
+  "message.animalgenders.milking_male_impossible": "无法对雄性进行挤奶。"
+}

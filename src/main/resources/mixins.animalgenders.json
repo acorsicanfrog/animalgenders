@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.acorsicanfrog.animalgenders.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "PlayerInteractMixin",
+		"AnimalCanMateMixin",
+		"ChickenEggMixin",
+		"EntityEggSpawnMixin"
+  ],
+  "client": [],
+  "server": []
+}

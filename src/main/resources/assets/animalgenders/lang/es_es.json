@@ -1,0 +1,6 @@
+{
+  "gender.animalgenders.male": "Macho",
+  "gender.animalgenders.female": "Hembra",
+  "gender.animalgenders.unknown": "Desconocido",
+  "message.animalgenders.milking_male_impossible": "No se puede ordeñar a los machos."
+}

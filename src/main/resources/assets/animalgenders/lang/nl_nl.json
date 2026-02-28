@@ -1,0 +1,6 @@
+{
+  "gender.animalgenders.male": "Mannelijk",
+  "gender.animalgenders.female": "Vrouwelijk",
+  "gender.animalgenders.unknown": "Onbekend",
+  "message.animalgenders.milking_male_impossible": "Melken kan niet bij mannetjes worden uitgevoerd."
+}

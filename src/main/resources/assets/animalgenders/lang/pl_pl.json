@@ -1,0 +1,6 @@
+{
+  "gender.animalgenders.male": "Samiec",
+  "gender.animalgenders.female": "Samica",
+  "gender.animalgenders.unknown": "Nieznany",
+  "message.animalgenders.milking_male_impossible": "Nie można doić samców."
+}

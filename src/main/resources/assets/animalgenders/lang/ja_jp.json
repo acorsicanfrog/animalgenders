@@ -1,0 +1,6 @@
+{
+  "gender.animalgenders.male": "オス",
+  "gender.animalgenders.female": "メス",
+  "gender.animalgenders.unknown": "不明",
+  "message.animalgenders.milking_male_impossible": "雄には搾乳できません。"
+}
