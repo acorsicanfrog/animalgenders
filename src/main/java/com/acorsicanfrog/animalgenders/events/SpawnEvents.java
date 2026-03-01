@@ -1,11 +1,14 @@
 package com.acorsicanfrog.animalgenders.events;
 
+import java.util.List;
+
+import com.acorsicanfrog.animalgenders.AnimalGendersConfig;
 import com.acorsicanfrog.animalgenders.AnimalGendersMod;
 import com.acorsicanfrog.animalgenders.Gender;
 import com.acorsicanfrog.animalgenders.attachment.GenderAttachment;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.Bee;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
@@ -22,12 +25,21 @@ public class SpawnEvents
 				// Only care about animals
 				if (!(event.getEntity() instanceof Animal animal)) return;
 
-				if (animal instanceof Bee) return; // Bees are insects and should not have any gender
+				// Check config blacklist / whitelist
+				String entityId = BuiltInRegistries.ENTITY_TYPE.getKey(animal.getType()).toString();
+
+				List<? extends String> blacklist = AnimalGendersConfig.GENDER_BLACKLIST.get();
+				if (blacklist.contains(entityId)) return;
+
+				List<? extends String> whitelist = AnimalGendersConfig.GENDER_WHITELIST.get();
+				if (!whitelist.isEmpty() && !whitelist.contains(entityId)) return;
 
 				// Don't overwrite existing gender (e.g. chunk reloads)
 				if (GenderAttachment.hasGender(animal)) return;
 
-				Gender gender = animal.getRandom().nextBoolean() ? Gender.MALE : Gender.FEMALE;
+				double femaleChance = AnimalGendersConfig.FEMALE_CHANCE.get();
+				
+				Gender gender = animal.getRandom().nextDouble() < femaleChance ? Gender.FEMALE : Gender.MALE;
 				
 				GenderAttachment.setGender(animal, gender);
     }

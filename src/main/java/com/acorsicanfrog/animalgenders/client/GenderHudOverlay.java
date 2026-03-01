@@ -19,21 +19,20 @@ import net.neoforged.fml.common.EventBusSubscriber;
  * entity with a known gender.
  *
  * Texture requirements: assets/<modid>/textures/gui/gender_male.png and
- * gender_female.png must be saved as 32-bit RGBA PNGs (not indexed/paletted).
+ * gender_female.png must be saved as RGBA PNGs (not indexed/paletted).
  * GuiGraphics.blit handles loading them automatically from the resource pack.
  */
 @EventBusSubscriber(modid = AnimalGendersMod.MOD_ID, value = Dist.CLIENT)
 public class GenderHudOverlay {
 
-	private static final ResourceLocation MALE_TEX = ResourceLocation.fromNamespaceAndPath(AnimalGendersMod.MOD_ID,
-			"textures/gui/gender_male.png");
-	private static final ResourceLocation FEMALE_TEX = ResourceLocation.fromNamespaceAndPath(AnimalGendersMod.MOD_ID,
-			"textures/gui/gender_female.png");
+	private static final ResourceLocation MALE_TEX = ResourceLocation.fromNamespaceAndPath(AnimalGendersMod.MOD_ID, "textures/gui/gender_male.png");
+	private static final ResourceLocation FEMALE_TEX = ResourceLocation.fromNamespaceAndPath(AnimalGendersMod.MOD_ID, "textures/gui/gender_female.png");
 
 	private static final int ICON_SIZE = 16;
 
 	@SubscribeEvent
-	public static void onRenderOverlay(final net.neoforged.neoforge.client.event.RenderGuiEvent.Post event) {
+	public static void onRenderOverlay(final net.neoforged.neoforge.client.event.RenderGuiEvent.Post event) 
+	{
 		Minecraft mc = Minecraft.getInstance();
 		var player = mc.player;
 
@@ -87,7 +86,8 @@ public class GenderHudOverlay {
 	 * Prefers mc.crosshairPickEntity (updated every tick by the engine) and
 	 * falls back to the geometry hit result for edge cases.
 	 */
-	private static Entity resolveTarget(Minecraft mc) {
+	private static Entity resolveTarget(Minecraft mc) 
+	{
 		if (mc.crosshairPickEntity != null)
 			return mc.crosshairPickEntity;
 

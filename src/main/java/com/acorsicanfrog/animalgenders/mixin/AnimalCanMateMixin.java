@@ -32,7 +32,8 @@ public abstract class AnimalCanMateMixin
 		if (g1 == Gender.UNKNOWN || g2 == Gender.UNKNOWN)
 			return;
 
-		if (g1 == g2) {
+		if (g1 == g2) 
+		{
 			cir.setReturnValue(false);
 			cir.cancel();
 		}

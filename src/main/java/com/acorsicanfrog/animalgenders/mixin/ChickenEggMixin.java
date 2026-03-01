@@ -13,18 +13,20 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(Chicken.class)
-public abstract class ChickenEggMixin {
-
-    @Redirect(method = "aiStep",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;spawnAtLocation(Lnet/minecraft/world/item/Item;)Lnet/minecraft/world/entity/ItemEntity;"))
-    private ItemEntity redirectSpawnAtLocation(Entity entity, Item item) {
-        if (entity instanceof Chicken chicken) {
+public abstract class ChickenEggMixin 
+{
+    @Redirect(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;spawnAtLocation(Lnet/minecraft/world/item/Item;)Lnet/minecraft/world/entity/ItemEntity;"))
+    private ItemEntity redirectSpawnAtLocation(Entity entity, Item item) 
+    {
+        if (entity instanceof Chicken chicken) 
+        {
             // If chicken has a male gender, skip spawning the egg
-            if (!chicken.level().isClientSide() && GenderAttachment.hasGender(chicken)) {
+            if (!chicken.level().isClientSide() && GenderAttachment.hasGender(chicken)) 
+            {
                 Gender g = GenderAttachment.getGender(chicken);
-                if (g == Gender.MALE) {
+
+                if (g == Gender.MALE)
                     return null;
-                }
             }
         }
 

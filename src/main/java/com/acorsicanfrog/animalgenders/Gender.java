@@ -8,14 +8,18 @@ public enum Gender
     MALE,
     FEMALE;
 
-    public static final Codec<Gender> CODEC = Codec.STRING.xmap(
-        s -> {
-            try {
+    public static final Codec<Gender> CODEC = Codec.STRING.xmap
+    (s -> 
+        {
+            try 
+            {
                 return Gender.valueOf(s.toUpperCase());
-            } catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) 
+            {
                 return UNKNOWN;
             }
         },
+        
         Gender::name
     );
 

@@ -19,7 +19,7 @@ public abstract class EntityEggSpawnMixin {
 
     @Inject(method = "spawnAtLocation(Lnet/minecraft/world/item/Item;)Lnet/minecraft/world/entity/ItemEntity;", at = @At("HEAD"), cancellable = true)
     private void onSpawnAtLocation(Item item, CallbackInfoReturnable<ItemEntity> cir) 
-		{
+    {
         Entity self = (Entity) (Object) this;
 
         // Only care about vanilla eggs

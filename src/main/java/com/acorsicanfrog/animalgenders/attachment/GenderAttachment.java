@@ -12,8 +12,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 public class GenderAttachment 
 {
-    public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES =
-        DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, AnimalGendersMod.MOD_ID);
+    public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, AnimalGendersMod.MOD_ID);
 
     public static final Supplier<AttachmentType<Gender>> GENDER =
         ATTACHMENT_TYPES.register("gender", () ->
@@ -22,9 +21,12 @@ public class GenderAttachment
                 .sync((holder, to) -> true,
                     net.minecraft.network.codec.ByteBufCodecs.STRING_UTF8
                         .map((java.util.function.Function<String, Gender>) s -> {
-                                try {
+                                try 
+                                {
                                     return Gender.valueOf(s.toUpperCase());
-                                } catch (IllegalArgumentException e) {
+                                } 
+                                catch (IllegalArgumentException e) 
+                                {
                                     return Gender.UNKNOWN;
                                 }
                             },

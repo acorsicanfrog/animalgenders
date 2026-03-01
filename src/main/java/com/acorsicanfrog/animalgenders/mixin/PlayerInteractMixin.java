@@ -8,6 +8,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.animal.Animal;
+// import net.minecraft.world.entity.animal.Cow;
+// import net.minecraft.world.entity.animal.goat.Goat;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -26,8 +28,7 @@ public class PlayerInteractMixin
 	// right-click handler. Targeting by exact name avoids the mixin errors produced
 	// when listing several candidate names (each one requires ≥1 injection point).
 	@Inject(method = "interactOn", at = @At("HEAD"), cancellable = true)
-	private void onInteractOn(Entity target, InteractionHand hand,
-			CallbackInfoReturnable<InteractionResult> cir)
+	private void onInteractOn(Entity target, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir)
 	{
 		if (!(target instanceof Animal animal))
 			return;
@@ -37,6 +38,12 @@ public class PlayerInteractMixin
 
 		if (!stack.is(Items.BUCKET))
 			return;
+
+		// // Only intercept milking for animals that can actually produce milk in vanilla.
+		// // Without this guard, the "cannot milk males" message fires on animals like frogs
+		// // or pigs that would never yield a milk bucket regardless of gender.
+		// if (!(animal instanceof Cow) && !(animal instanceof Goat))
+		// 	return;
 
 		// If the client doesn't have attachment data yet, let the server decide.
 		if (!GenderAttachment.hasGender(animal))
