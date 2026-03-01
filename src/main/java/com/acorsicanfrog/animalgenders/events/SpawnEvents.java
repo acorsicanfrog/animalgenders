@@ -37,7 +37,8 @@ public class SpawnEvents
 				// Don't overwrite existing gender (e.g. chunk reloads)
 				if (GenderAttachment.hasGender(animal)) return;
 
-				double femaleChance = AnimalGendersConfig.FEMALE_CHANCE.get();
+				Double configChance = AnimalGendersConfig.FEMALE_CHANCE.get();
+				double femaleChance = animal.isBaby() ? 0.5 : (configChance != null ? configChance : 0.5);
 				
 				Gender gender = animal.getRandom().nextDouble() < femaleChance ? Gender.FEMALE : Gender.MALE;
 				

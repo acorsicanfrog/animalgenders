@@ -47,9 +47,9 @@ public class AnimalGendersConfig
             .comment(
                 "Probability (0.0 to 1.0) that a newly spawned animal is assigned female.",
                 "The remaining probability is assigned male.",
-                "Default: 0.7 (70% female, 30% male)."
+                "Default: 0.8 (80% female, 20% male)."
             )
-            .defineInRange("female_chance", 0.7, 0.0, 1.0);
+            .defineInRange("female_chance", 0.8, 0.0, 1.0);
 
         BUILDER.pop();
     }
