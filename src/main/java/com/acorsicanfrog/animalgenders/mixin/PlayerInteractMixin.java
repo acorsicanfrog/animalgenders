@@ -12,53 +12,47 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import net.minecraft.world.entity.Entity;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Player.class)
-public class PlayerInteractMixin 
+public class PlayerInteractMixin
 {
-	private static final Logger LOGGER = LogManager.getLogger("animalgenders.PlayerInteractMixin");
+	// "interactOn" is the Parchment-mapped name in MC 1.21.1 for Player's entity
+	// right-click handler. Targeting by exact name avoids the mixin errors produced
+	// when listing several candidate names (each one requires ≥1 injection point).
+	@Inject(method = "interactOn", at = @At("HEAD"), cancellable = true)
+	private void onInteractOn(Entity target, InteractionHand hand,
+			CallbackInfoReturnable<InteractionResult> cir)
+	{
+		if (!(target instanceof Animal animal))
+			return;
 
-	// try several likely method names (covers mapping differences)
-	@Inject(method = { "interact", "interactAt", "interactOn" }, at = @At("HEAD"), cancellable = true)
-	private void onInteract(net.minecraft.world.entity.Entity target, InteractionHand hand,
-			CallbackInfoReturnable<InteractionResult> cir) 
-			{
-		try {
-			if (!(target instanceof Animal))
-				return;
+		Player self = (Player) (Object) this;
+		ItemStack stack = self.getItemInHand(hand);
 
-			Player self = (Player) (Object) this;
-			ItemStack stack = self.getItemInHand(hand);
-			
-			if (!stack.is(Items.BUCKET))
-				return;
+		if (!stack.is(Items.BUCKET))
+			return;
 
-			Animal animal = (Animal) target;
-			// If the client doesn't have attachment data yet, let the server decide.
-			if (!GenderAttachment.hasGender(animal))
-				return;
+		// If the client doesn't have attachment data yet, let the server decide.
+		if (!GenderAttachment.hasGender(animal))
+			return;
 
-			Gender g = GenderAttachment.getGender(animal);
+		Gender g = GenderAttachment.getGender(animal);
 
-			if (g == Gender.MALE) 
-			{
-				if (!self.level().isClientSide() && self instanceof ServerPlayer sp) 
-				{
-					sp.sendSystemMessage(Component.translatable("message.animalgenders.milking_male_impossible"));
-				}
-
-				cir.setReturnValue(InteractionResult.FAIL);
-				cir.cancel();
-			}
-		} catch (Throwable t)
+		if (g == Gender.MALE)
 		{
-			LOGGER.error("Error in PlayerInteractMixin.onInteract", t);
+			if (!self.level().isClientSide() && self instanceof ServerPlayer sp)
+			{
+				sp.sendSystemMessage(Component.translatable("message.animalgenders.milking_male_impossible"));
+			}
+
+			cir.setReturnValue(InteractionResult.FAIL);
+			cir.cancel();
 		}
 	}
 }

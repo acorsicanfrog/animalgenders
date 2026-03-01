@@ -32,7 +32,12 @@ public class EggLayingEvents
         if (g != Gender.MALE)
             return;
 
-        // Reset egg countdown so it never reaches 0
-        chicken.eggTime = chicken.getRandom().nextInt(6000) + 6000;
+        // Safety-net: only kick in when the countdown is about to reach 0.
+        // The ChickenEggMixin / EntityEggSpawnMixin already prevent the actual item
+        // from spawning, but resetting the timer here prevents noisy log entries
+        // from any third-party mod that may listen to the egg-lay moment.
+        // Running this every tick for every male chicken would be needlessly expensive.
+        if (chicken.eggTime <= 1)
+            chicken.eggTime = chicken.getRandom().nextInt(6000) + 6000;
     }
 }

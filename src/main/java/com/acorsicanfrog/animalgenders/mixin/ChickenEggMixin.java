@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(Chicken.class)
 public abstract class ChickenEggMixin {
 
-    @Redirect(method = {"aiStep", "tick"},
+    @Redirect(method = "aiStep",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;spawnAtLocation(Lnet/minecraft/world/item/Item;)Lnet/minecraft/world/entity/ItemEntity;"))
     private ItemEntity redirectSpawnAtLocation(Entity entity, Item item) {
         if (entity instanceof Chicken chicken) {

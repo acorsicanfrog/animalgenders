@@ -10,6 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 
@@ -21,7 +22,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
  * gender_female.png must be saved as 32-bit RGBA PNGs (not indexed/paletted).
  * GuiGraphics.blit handles loading them automatically from the resource pack.
  */
-@EventBusSubscriber(modid = AnimalGendersMod.MOD_ID)
+@EventBusSubscriber(modid = AnimalGendersMod.MOD_ID, value = Dist.CLIENT)
 public class GenderHudOverlay {
 
 	private static final ResourceLocation MALE_TEX = ResourceLocation.fromNamespaceAndPath(AnimalGendersMod.MOD_ID,
