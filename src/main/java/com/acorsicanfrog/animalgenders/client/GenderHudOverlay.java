@@ -12,6 +12,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
 
 /**
@@ -36,8 +37,9 @@ public class GenderHudOverlay {
 		Minecraft mc = Minecraft.getInstance();
 		var player = mc.player;
 
-		// Don't render when the HUD is hidden (F1) or while a screen is open
-		if (player == null || mc.level == null || mc.screen != null || mc.options.hideGui)
+		// Don't render when the HUD is hidden (F1), while a screen is open, or when Jade is handling it
+		if (player == null || mc.level == null || mc.screen != null || mc.options.hideGui
+				|| ModList.get().isLoaded("jade"))
 			return;
 
 		Entity target = resolveTarget(mc);

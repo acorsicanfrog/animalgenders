@@ -2,5 +2,7 @@
   "gender.animalgenders.male": "Mannelijk",
   "gender.animalgenders.female": "Vrouwelijk",
   "gender.animalgenders.unknown": "Onbekend",
-  "message.animalgenders.milking_male_impossible": "Melken kan niet bij mannetjes worden uitgevoerd."
+  "message.animalgenders.milking_male_impossible": "Melken kan niet bij mannetjes worden uitgevoerd.",
+
+  "config.jade.plugin_animalgenders.entity_gender": "Dierlijk geslacht"
 }

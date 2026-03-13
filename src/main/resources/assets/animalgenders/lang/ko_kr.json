@@ -2,5 +2,7 @@
   "gender.animalgenders.male": "수컷",
   "gender.animalgenders.female": "암컷",
   "gender.animalgenders.unknown": "알 수 없음",
-  "message.animalgenders.milking_male_impossible": "수컷에는 착유할 수 없습니다."
+  "message.animalgenders.milking_male_impossible": "수컷에는 착유할 수 없습니다.",
+
+  "config.jade.plugin_animalgenders.entity_gender": "동물 성별"
 }

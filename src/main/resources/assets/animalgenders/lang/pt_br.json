@@ -2,5 +2,7 @@
   "gender.animalgenders.male": "Macho",
   "gender.animalgenders.female": "Fêmea",
   "gender.animalgenders.unknown": "Desconhecido",
-  "message.animalgenders.milking_male_impossible": "Não é possível ordenhar os machos."
+  "message.animalgenders.milking_male_impossible": "Não é possível ordenhar os machos.",
+
+  "config.jade.plugin_animalgenders.entity_gender": "Gênero do animal"
 }

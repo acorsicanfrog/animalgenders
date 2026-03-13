@@ -2,5 +2,7 @@
   "gender.animalgenders.male": "Hím",
   "gender.animalgenders.female": "Nőstény",
   "gender.animalgenders.unknown": "Ismeretlen",
-  "message.animalgenders.milking_male_impossible": "A kanokat nem lehet fejni."
+  "message.animalgenders.milking_male_impossible": "A kanokat nem lehet fejni.",
+
+  "config.jade.plugin_animalgenders.entity_gender": "Állat neme"
 }

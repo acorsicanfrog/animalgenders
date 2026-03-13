@@ -2,5 +2,7 @@
   "gender.animalgenders.male": "ذكر",
   "gender.animalgenders.female": "أنثى",
   "gender.animalgenders.unknown": "غير معروف",
-  "message.animalgenders.milking_male_impossible": "لا يمكن حلب الذكور."
+  "message.animalgenders.milking_male_impossible": "لا يمكن حلب الذكور.",
+
+  "config.jade.plugin_animalgenders.entity_gender": "جنس الحيوان"
 }

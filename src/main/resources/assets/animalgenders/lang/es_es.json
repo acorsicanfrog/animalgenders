@@ -2,5 +2,7 @@
   "gender.animalgenders.male": "Macho",
   "gender.animalgenders.female": "Hembra",
   "gender.animalgenders.unknown": "Desconocido",
-  "message.animalgenders.milking_male_impossible": "No se puede ordeñar a los machos."
+  "message.animalgenders.milking_male_impossible": "No se puede ordeñar a los machos.",
+
+  "config.jade.plugin_animalgenders.entity_gender": "Género del animal"
 }
