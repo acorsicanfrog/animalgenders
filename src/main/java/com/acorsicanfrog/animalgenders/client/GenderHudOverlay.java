@@ -36,8 +36,8 @@ public class GenderHudOverlay {
 		Minecraft mc = Minecraft.getInstance();
 		var player = mc.player;
 
-		// Don't render while a screen is open (inventory, chat, etc.)
-		if (player == null || mc.level == null || mc.screen != null)
+		// Don't render when the HUD is hidden (F1) or while a screen is open
+		if (player == null || mc.level == null || mc.screen != null || mc.options.hideGui)
 			return;
 
 		Entity target = resolveTarget(mc);
