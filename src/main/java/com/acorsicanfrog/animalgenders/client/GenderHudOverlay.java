@@ -26,8 +26,8 @@ import net.neoforged.fml.common.EventBusSubscriber;
 @EventBusSubscriber(modid = AnimalGendersMod.MOD_ID, value = Dist.CLIENT)
 public class GenderHudOverlay {
 
-	private static final ResourceLocation MALE_TEX = ResourceLocation.fromNamespaceAndPath(AnimalGendersMod.MOD_ID, "textures/gui/gender_male.png");
-	private static final ResourceLocation FEMALE_TEX = ResourceLocation.fromNamespaceAndPath(AnimalGendersMod.MOD_ID, "textures/gui/gender_female.png");
+	private static final ResourceLocation MALE_SPRITE = ResourceLocation.fromNamespaceAndPath(AnimalGendersMod.MOD_ID, "gender_male");
+	private static final ResourceLocation FEMALE_SPRITE = ResourceLocation.fromNamespaceAndPath(AnimalGendersMod.MOD_ID, "gender_female");
 
 	private static final int ICON_SIZE = 16;
 
@@ -53,7 +53,7 @@ public class GenderHudOverlay {
 		if (g == null || g == Gender.UNKNOWN)
 			return;
 
-		ResourceLocation tex = (g == Gender.MALE) ? MALE_TEX : FEMALE_TEX;
+		ResourceLocation sprite = (g == Gender.MALE) ? MALE_SPRITE : FEMALE_SPRITE;
 
 		int screenW = mc.getWindow().getGuiScaledWidth();
 		int screenH = mc.getWindow().getGuiScaledHeight();
@@ -68,14 +68,10 @@ public class GenderHudOverlay {
 
 		var gui = event.getGuiGraphics();
 
-		// GuiGraphics manages its own shader state — do NOT call
-		// RenderSystem.setShader / setShaderTexture before blit, it will conflict.
 		RenderSystem.enableBlend();
 		RenderSystem.defaultBlendFunc();
 
-		// blit(ResourceLocation, destX, destY, srcU, srcV, width, height, texW, texH)
-		// For a 16x16 texture used in full: srcU=0, srcV=0, texW=16, texH=16.
-		gui.blit(tex, x, y, 0, 0, ICON_SIZE, ICON_SIZE, ICON_SIZE, ICON_SIZE);
+		gui.blitSprite(sprite, x, y, ICON_SIZE, ICON_SIZE);
 
 		RenderSystem.disableBlend();
 
