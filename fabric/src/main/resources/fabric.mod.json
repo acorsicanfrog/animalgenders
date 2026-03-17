@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${mod_version}",
+  "name": "${mod_name}",
+  "description": "Adds Gender to All Minecraft Animals. Breeding now respects gender: only male + female pairings are possible. Female animals have exclusive abilities like laying eggs and being milked.",
+  "authors": [
+    "A Corsican Frog"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/animal-genders",
+    "issues": "https://github.com/acorsicanfrog/animalgenders/issues",
+    "sources": "https://github.com/acorsicanfrog/animalgenders"
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/animalgenders/logo.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.acorsicanfrog.animalgenders.fabric.AnimalGendersModFabric"
+    ],
+    "client": [
+      "com.acorsicanfrog.animalgenders.fabric.AnimalGendersClientFabric"
+    ],
+    "jade": [
+      "com.acorsicanfrog.animalgenders.compat.jade.AnimalGendersJadePlugin"
+    ]
+  },
+  "mixins": [
+    "mixins.animalgenders-common.json",
+    "mixins.animalgenders-fabric.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${fabric_loader_version}",
+    "minecraft": "~${minecraft_version}",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "jade": "*"
+  }
+}

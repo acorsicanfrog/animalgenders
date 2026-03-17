@@ -1,11 +1,12 @@
 {
   "homepage": "https://modrinth.com/mod/animal-genders",
   "1.21.1": {
-    "1.0.1": "Current release",
-    "1.0.0": "Initial release"
+    "1.1.0": "Added Fabric support (as separate JAR).",
+    "1.0.1": "Added support for Jade. Added Update checker. Added mod update and homepage URLs. Fixed gender not hidden when HUD was disabled.",
+    "1.0.0": "Initial release."
   },
   "promos": {
-    "1.21.1-recommended": "1.0.1",
-    "1.21.1-latest": "1.0.1"
+    "1.21.1-recommended": "1.1.0",
+    "1.21.1-latest": "1.1.0"
   }
 }

@@ -1,0 +1,59 @@
+plugins {
+    id 'fabric-loom' version '1.9-SNAPSHOT'
+}
+
+version = mod_version
+group = mod_group_id
+
+base {
+    archivesName = "${mod_id}-fabric-${minecraft_version}"
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+repositories {
+    maven { url = "https://api.modrinth.com/maven" }
+}
+
+// Include common sources and resources so they are compiled in the Fabric context
+sourceSets.main {
+    java.srcDirs += "${rootProject.projectDir}/common/src/main/java"
+    resources.srcDirs += "${rootProject.projectDir}/common/src/main/resources"
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${minecraft_version}"
+    mappings loom.officialMojangMappings()
+    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
+    // Jade Fabric (optional — compile-only)
+    modCompileOnly "maven.modrinth:jade:${jade_fabric_version}"
+    modLocalRuntime "maven.modrinth:jade:${jade_fabric_version}"
+}
+
+processResources {
+    var replaceProperties = [
+        mod_version          : mod_version,
+        mod_id               : mod_id,
+        mod_name             : mod_name,
+        minecraft_version    : minecraft_version,
+        fabric_loader_version: fabric_loader_version,
+    ]
+    inputs.properties replaceProperties
+    filesMatching("fabric.mod.json") {
+        expand replaceProperties
+    }
+}
+
+loom {
+    runs {
+        client {
+            client()
+            runDir "run"
+        }
+        server {
+            server()
+            runDir "run"
+        }
+    }
+}
