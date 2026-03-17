@@ -1,6 +1,5 @@
 package com.acorsicanfrog.animalgenders.fabric;
 
-import com.acorsicanfrog.animalgenders.Constants;
 import com.acorsicanfrog.animalgenders.Gender;
 import com.acorsicanfrog.animalgenders.fabric.network.GenderNetworking;
 import com.acorsicanfrog.animalgenders.platform.Services;

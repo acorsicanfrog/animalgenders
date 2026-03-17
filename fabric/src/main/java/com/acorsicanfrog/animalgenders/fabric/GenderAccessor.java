@@ -1,7 +1,6 @@
 package com.acorsicanfrog.animalgenders.fabric;
 
 import com.acorsicanfrog.animalgenders.Gender;
-import net.minecraft.world.entity.Entity;
 
 /**
  * Duck interface injected into Entity via GenderDataMixin.
