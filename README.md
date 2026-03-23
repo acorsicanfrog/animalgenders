@@ -25,5 +25,4 @@ The mod applies to entities extending the Animal class, ensuring it works with m
 
 
 ## Bug report
-
 If you encounter compatibility issues, feel free to report them — I’ll do my best to fix them!
