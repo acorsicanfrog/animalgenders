@@ -4,12 +4,12 @@ import com.acorsicanfrog.animalgenders.Constants;
 import com.acorsicanfrog.animalgenders.Gender;
 import com.acorsicanfrog.animalgenders.fabric.network.GenderNetworking;
 import com.acorsicanfrog.animalgenders.platform.Services;
-import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.EntityHitResult;
@@ -62,18 +62,13 @@ public class AnimalGendersClientFabric implements ClientModInitializer
             int x = (screenW - ICON_SIZE) / 2;
             int y = (screenH / 2) - yOffset - ICON_SIZE;
 
-            RenderSystem.enableBlend();
-            RenderSystem.defaultBlendFunc();
-
-            guiGraphics.blitSprite(sprite, x, y, ICON_SIZE, ICON_SIZE);
-
-            RenderSystem.disableBlend();
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, sprite, x, y, ICON_SIZE, ICON_SIZE);
 
             guiGraphics.drawString(mc.font,
                     net.minecraft.network.chat.Component.translatable(g.getTranslationKey()),
                     x + ICON_SIZE + 4,
                     y + (ICON_SIZE - mc.font.lineHeight) / 2,
-                    0xFFFFFF);
+                    0xFFFFFFFF);
         });
     }
 

@@ -3,9 +3,9 @@ package com.acorsicanfrog.animalgenders.client;
 import com.acorsicanfrog.animalgenders.Constants;
 import com.acorsicanfrog.animalgenders.Gender;
 import com.acorsicanfrog.animalgenders.attachment.GenderAttachment;
-import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.EntityHitResult;
@@ -58,14 +58,9 @@ public class GenderHudOverlay {
 
 		var gui = event.getGuiGraphics();
 
-		RenderSystem.enableBlend();
-		RenderSystem.defaultBlendFunc();
+		gui.blitSprite(RenderPipelines.GUI_TEXTURED, sprite, x, y, ICON_SIZE, ICON_SIZE);
 
-		gui.blitSprite(sprite, x, y, ICON_SIZE, ICON_SIZE);
-
-		RenderSystem.disableBlend();
-
-		gui.drawString(mc.font, net.minecraft.network.chat.Component.translatable(g.getTranslationKey()), x + ICON_SIZE + 4, y + (ICON_SIZE - mc.font.lineHeight) / 2, 0xFFFFFF);
+		gui.drawString(mc.font, net.minecraft.network.chat.Component.translatable(g.getTranslationKey()), x + ICON_SIZE + 4, y + (ICON_SIZE - mc.font.lineHeight) / 2, 0xFFFFFFFF);
 	}
 
 	private static Entity resolveTarget(Minecraft mc) 

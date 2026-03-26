@@ -10,7 +10,7 @@ import snownee.jade.api.EntityAccessor;
 import snownee.jade.api.IEntityComponentProvider;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
-import snownee.jade.api.ui.IElementHelper;
+import snownee.jade.api.ui.JadeUI;
 
 public enum GenderEntityProvider implements IEntityComponentProvider {
 
@@ -39,9 +39,8 @@ public enum GenderEntityProvider implements IEntityComponentProvider {
 			return;
 
 		ResourceLocation sprite = (gender == Gender.MALE) ? MALE_SPRITE : FEMALE_SPRITE;
-		IElementHelper helper = IElementHelper.get();
-		tooltip.add(helper.sprite(sprite, ICON_SIZE, ICON_SIZE));
-		tooltip.append(helper.spacer(4, 0));
+		tooltip.add(JadeUI.sprite(sprite, ICON_SIZE, ICON_SIZE));
+		tooltip.append(JadeUI.spacer(4, 0));
 		tooltip.append(Component.translatable(gender.getTranslationKey()));
 	}
 }

@@ -3,15 +3,15 @@ package com.acorsicanfrog.animalgenders.fabric.mixin;
 import com.acorsicanfrog.animalgenders.Gender;
 import com.acorsicanfrog.animalgenders.fabric.GenderAccessor;
 
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Entity.class)
 public class GenderDataMixin implements GenderAccessor
@@ -42,22 +42,22 @@ public class GenderDataMixin implements GenderAccessor
     }
 
     @Inject(method = "saveWithoutId", at = @At("RETURN"))
-    private void onSaveWithoutId(CompoundTag tag, CallbackInfoReturnable<CompoundTag> cir)
+    private void onSaveWithoutId(ValueOutput output, CallbackInfo ci)
     {
         if (animalgenders$hasGender)
         {
-            tag.putString("animalgenders:gender", animalgenders$gender.name());
+            output.putString("animalgenders:gender", animalgenders$gender.name());
         }
     }
 
     @Inject(method = "load", at = @At("RETURN"))
-    private void onLoad(CompoundTag tag, CallbackInfo ci)
+    private void onLoad(ValueInput input, CallbackInfo ci)
     {
-        if (tag.contains("animalgenders:gender"))
+        input.getString("animalgenders:gender").ifPresent(s ->
         {
             try
             {
-                animalgenders$gender = Gender.valueOf(tag.getString("animalgenders:gender").toUpperCase());
+                animalgenders$gender = Gender.valueOf(s.toUpperCase());
                 animalgenders$hasGender = true;
             }
             catch (IllegalArgumentException e)
@@ -65,6 +65,6 @@ public class GenderDataMixin implements GenderAccessor
                 animalgenders$gender = Gender.UNKNOWN;
                 animalgenders$hasGender = false;
             }
-        }
+        });
     }
 }

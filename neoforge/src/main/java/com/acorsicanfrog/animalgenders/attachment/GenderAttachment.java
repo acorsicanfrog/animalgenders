@@ -17,7 +17,7 @@ public class GenderAttachment
     public static final Supplier<AttachmentType<Gender>> GENDER =
         ATTACHMENT_TYPES.register("gender", () ->
             AttachmentType.builder(() -> Gender.UNKNOWN)
-                .serialize(Gender.CODEC)
+                .serialize(Gender.CODEC.fieldOf("gender"))
                 .sync((holder, to) -> true,
                     net.minecraft.network.codec.ByteBufCodecs.STRING_UTF8
                         .map((java.util.function.Function<String, Gender>) s -> {

@@ -7,6 +7,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.server.level.ServerLevel;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -21,8 +22,8 @@ public abstract class ChickenEggMixin
     @Shadow public int eggTime;
 
     // Prevent male chickens from actually dropping an egg item
-    @Redirect(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;spawnAtLocation(Lnet/minecraft/world/level/ItemLike;)Lnet/minecraft/world/entity/ItemEntity;"))
-    private ItemEntity redirectSpawnAtLocation(Entity entity, ItemLike item) 
+    @Redirect(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;spawnAtLocation(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/level/ItemLike;)Lnet/minecraft/world/entity/ItemEntity;"))
+    private ItemEntity redirectSpawnAtLocation(Entity entity, ServerLevel level, ItemLike item) 
     {
         if (entity instanceof Chicken chicken) 
         {
@@ -35,7 +36,7 @@ public abstract class ChickenEggMixin
             }
         }
 
-        return entity.spawnAtLocation(item);
+        return entity.spawnAtLocation(level, item);
     }
 
     // Reset the egg timer for male chickens before it reaches zero,
