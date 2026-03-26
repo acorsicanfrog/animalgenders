@@ -53,11 +53,11 @@ public class GenderDataMixin implements GenderAccessor
     @Inject(method = "load", at = @At("RETURN"))
     private void onLoad(CompoundTag tag, CallbackInfo ci)
     {
-        if (tag.contains("animalgenders:gender"))
+        tag.getString("animalgenders:gender").ifPresent(s ->
         {
             try
             {
-                animalgenders$gender = Gender.valueOf(tag.getString("animalgenders:gender").toUpperCase());
+                animalgenders$gender = Gender.valueOf(s.toUpperCase());
                 animalgenders$hasGender = true;
             }
             catch (IllegalArgumentException e)
@@ -65,6 +65,6 @@ public class GenderDataMixin implements GenderAccessor
                 animalgenders$gender = Gender.UNKNOWN;
                 animalgenders$hasGender = false;
             }
-        }
+        });
     }
 }

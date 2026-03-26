@@ -11,9 +11,7 @@ updateJSONURL="https://raw.githubusercontent.com/acorsicanfrog/animalgenders/mai
 displayURL="https://modrinth.com/mod/animal-genders"
 logoFile="assets/${mod_id}/logo.png"
 authors="A Corsican Frog"
-description='''
-Introduces male and female genders for all animals.
-'''
+description='''Introduces male and female genders for all animals.'''
 
 [[mixins]]
 config="mixins.animalgenders-common.json"

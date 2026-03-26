@@ -5,7 +5,7 @@ import java.util.List;
 import com.acorsicanfrog.animalgenders.platform.Services;
 
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.animal.Animal;
 
 public final class GenderAssignment
@@ -14,7 +14,7 @@ public final class GenderAssignment
     {
     }
 
-    public static void assignIfMissing(Animal animal, MobSpawnType spawnType)
+    public static void assignIfMissing(Animal animal, EntitySpawnReason spawnType)
     {
         if (!shouldAssignGender(animal))
         {
@@ -45,9 +45,9 @@ public final class GenderAssignment
         return !Services.PLATFORM.hasGender(animal);
     }
 
-    private static double getFemaleChance(Animal animal, MobSpawnType spawnType)
+    private static double getFemaleChance(Animal animal, EntitySpawnReason spawnType)
     {
-        if (spawnType == MobSpawnType.SPAWN_EGG || spawnType == MobSpawnType.DISPENSER || spawnType == MobSpawnType.BREEDING)
+        if (spawnType == EntitySpawnReason.SPAWN_ITEM_USE || spawnType == EntitySpawnReason.DISPENSER || spawnType == EntitySpawnReason.BREEDING)
         {
             return 0.5;
         }

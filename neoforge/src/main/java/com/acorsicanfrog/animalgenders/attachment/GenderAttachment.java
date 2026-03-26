@@ -16,22 +16,8 @@ public class GenderAttachment
 
     public static final Supplier<AttachmentType<Gender>> GENDER =
         ATTACHMENT_TYPES.register("gender", () ->
-            AttachmentType.builder(() -> Gender.UNKNOWN)
+            AttachmentType.<Gender>builder(() -> Gender.UNKNOWN)
                 .serialize(Gender.CODEC)
-                .sync((holder, to) -> true,
-                    net.minecraft.network.codec.ByteBufCodecs.STRING_UTF8
-                        .map((java.util.function.Function<String, Gender>) s -> {
-                                try 
-                                {
-                                    return Gender.valueOf(s.toUpperCase());
-                                } 
-                                catch (IllegalArgumentException e) 
-                                {
-                                    return Gender.UNKNOWN;
-                                }
-                            },
-                             (java.util.function.Function<Gender, String>) Gender::name)
-                )
                 .build()
         );
 
