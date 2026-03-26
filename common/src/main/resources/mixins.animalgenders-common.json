@@ -7,7 +7,8 @@
     "PlayerInteractMixin",
     "AnimalCanMateMixin",
     "ChickenEggMixin",
-    "EntityEggSpawnMixin"
+    "EntityEggSpawnMixin",
+    "MobGenderSpawnMixin"
   ],
   "client": [],
   "server": []

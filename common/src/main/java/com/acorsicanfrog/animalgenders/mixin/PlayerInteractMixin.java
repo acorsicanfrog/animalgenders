@@ -1,6 +1,7 @@
 package com.acorsicanfrog.animalgenders.mixin;
 
 import com.acorsicanfrog.animalgenders.Gender;
+import com.acorsicanfrog.animalgenders.GenderAssignment;
 import com.acorsicanfrog.animalgenders.platform.Services;
 
 import net.minecraft.network.chat.Component;
@@ -27,6 +28,11 @@ public class PlayerInteractMixin
 	{
 		if (!(target instanceof Animal animal))
 			return;
+
+		if (!animal.level().isClientSide())
+		{
+			GenderAssignment.assignIfMissing(animal, null);
+		}
 
 		Player self = (Player) (Object) this;
 		ItemStack stack = self.getItemInHand(hand);

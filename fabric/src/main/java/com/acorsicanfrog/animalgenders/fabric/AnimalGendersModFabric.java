@@ -1,5 +1,6 @@
 package com.acorsicanfrog.animalgenders.fabric;
 
+import com.acorsicanfrog.animalgenders.GenderAssignment;
 import com.acorsicanfrog.animalgenders.Gender;
 import com.acorsicanfrog.animalgenders.fabric.network.GenderNetworking;
 import com.acorsicanfrog.animalgenders.platform.Services;
@@ -7,11 +8,8 @@ import com.acorsicanfrog.animalgenders.platform.Services;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.networking.v1.EntityTrackingEvents;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.animal.Animal;
-
-import java.util.List;
 
 public class AnimalGendersModFabric implements ModInitializer
 {
@@ -31,28 +29,24 @@ public class AnimalGendersModFabric implements ModInitializer
 
             if (!(entity instanceof Animal animal)) return;
 
-            String entityId = BuiltInRegistries.ENTITY_TYPE.getKey(animal.getType()).toString();
-
-            List<String> blacklist = Services.PLATFORM.getBlacklist();
-            if (blacklist.contains(entityId)) return;
-
-            List<String> whitelist = Services.PLATFORM.getWhitelist();
-            if (!whitelist.isEmpty() && !whitelist.contains(entityId)) return;
-
-            if (Services.PLATFORM.hasGender(animal)) return;
-
-            double femaleChance = animal.isBaby() ? 0.5 : Services.PLATFORM.getFemaleChance();
-            Gender gender = animal.getRandom().nextDouble() < femaleChance ? Gender.FEMALE : Gender.MALE;
-
-            Services.PLATFORM.setGender(animal, gender);
+            boolean hadGender = Services.PLATFORM.hasGender(animal);
+            GenderAssignment.assignIfMissing(animal, null);
 
             // Sync to all players currently tracking this entity
-            GenderNetworking.sendToTracking(animal, gender);
+            if (!hadGender && Services.PLATFORM.hasGender(animal))
+            {
+                GenderNetworking.sendToTracking(animal, Services.PLATFORM.getGender(animal));
+            }
         });
 
         // Send gender data when a player starts tracking an entity
         EntityTrackingEvents.START_TRACKING.register((trackedEntity, player) ->
         {
+            if (trackedEntity instanceof Animal animal)
+            {
+                GenderAssignment.assignIfMissing(animal, null);
+            }
+
             if (!Services.PLATFORM.hasGender(trackedEntity)) return;
 
             Gender g = Services.PLATFORM.getGender(trackedEntity);

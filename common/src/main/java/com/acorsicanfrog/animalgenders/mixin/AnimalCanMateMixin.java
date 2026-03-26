@@ -1,6 +1,7 @@
 package com.acorsicanfrog.animalgenders.mixin;
 
 import com.acorsicanfrog.animalgenders.Gender;
+import com.acorsicanfrog.animalgenders.GenderAssignment;
 import com.acorsicanfrog.animalgenders.platform.Services;
 
 import net.minecraft.world.entity.animal.Animal;
@@ -20,6 +21,9 @@ public abstract class AnimalCanMateMixin
 
 		if (self.level().isClientSide())
 			return;
+
+		GenderAssignment.assignIfMissing(self, null);
+		GenderAssignment.assignIfMissing(other, null);
 
 		if (!Services.PLATFORM.hasGender(self) || !Services.PLATFORM.hasGender(other))
 			return;
