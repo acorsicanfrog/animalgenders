@@ -3,10 +3,10 @@ package com.acorsicanfrog.animalgenders.client;
 import com.acorsicanfrog.animalgenders.Constants;
 import com.acorsicanfrog.animalgenders.Gender;
 import com.acorsicanfrog.animalgenders.attachment.GenderAttachment;
-import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -18,8 +18,8 @@ import net.neoforged.fml.common.EventBusSubscriber;
 @EventBusSubscriber(modid = Constants.MOD_ID, value = Dist.CLIENT)
 public class GenderHudOverlay {
 
-	private static final ResourceLocation MALE_SPRITE = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "gender_male");
-	private static final ResourceLocation FEMALE_SPRITE = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "gender_female");
+	private static final Identifier MALE_SPRITE = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "gender_male");
+	private static final Identifier FEMALE_SPRITE = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "gender_female");
 
 	private static final int ICON_SIZE = 16;
 
@@ -44,7 +44,7 @@ public class GenderHudOverlay {
 		if (g == null || g == Gender.UNKNOWN)
 			return;
 
-		ResourceLocation sprite = (g == Gender.MALE) ? MALE_SPRITE : FEMALE_SPRITE;
+		Identifier sprite = (g == Gender.MALE) ? MALE_SPRITE : FEMALE_SPRITE;
 
 		int screenW = mc.getWindow().getGuiScaledWidth();
 		int screenH = mc.getWindow().getGuiScaledHeight();
@@ -58,14 +58,9 @@ public class GenderHudOverlay {
 
 		var gui = event.getGuiGraphics();
 
-		RenderSystem.enableBlend();
-		RenderSystem.defaultBlendFunc();
+		gui.blitSprite(RenderPipelines.GUI_TEXTURED, sprite, x, y, ICON_SIZE, ICON_SIZE);
 
-		gui.blitSprite(sprite, x, y, ICON_SIZE, ICON_SIZE);
-
-		RenderSystem.disableBlend();
-
-		gui.drawString(mc.font, net.minecraft.network.chat.Component.translatable(g.getTranslationKey()), x + ICON_SIZE + 4, y + (ICON_SIZE - mc.font.lineHeight) / 2, 0xFFFFFF);
+		gui.drawString(mc.font, net.minecraft.network.chat.Component.translatable(g.getTranslationKey()), x + ICON_SIZE + 4, y + (ICON_SIZE - mc.font.lineHeight) / 2, 0xFFFFFFFF, true);
 	}
 
 	private static Entity resolveTarget(Minecraft mc) 

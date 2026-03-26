@@ -3,9 +3,10 @@ package com.acorsicanfrog.animalgenders.mixin;
 import com.acorsicanfrog.animalgenders.Gender;
 import com.acorsicanfrog.animalgenders.platform.Services;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.animal.Chicken;
+import net.minecraft.world.entity.animal.chicken.Chicken;
 import net.minecraft.world.level.ItemLike;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -21,7 +22,7 @@ public abstract class ChickenEggMixin
     @Shadow public int eggTime;
 
     // Prevent male chickens from actually dropping an egg item
-    @Redirect(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;spawnAtLocation(Lnet/minecraft/world/level/ItemLike;)Lnet/minecraft/world/entity/ItemEntity;"))
+    @Redirect(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;spawnAtLocation(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/level/ItemLike;)Lnet/minecraft/world/entity/item/ItemEntity;"))
     private ItemEntity redirectSpawnAtLocation(Entity entity, ItemLike item) 
     {
         if (entity instanceof Chicken chicken) 
@@ -35,7 +36,10 @@ public abstract class ChickenEggMixin
             }
         }
 
-        return entity.spawnAtLocation(item);
+        if (entity.level() instanceof ServerLevel serverLevel)
+            return entity.spawnAtLocation(serverLevel, item);
+
+        return null;
     }
 
     // Reset the egg timer for male chickens before it reaches zero,

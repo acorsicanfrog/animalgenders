@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.9-SNAPSHOT'
+    id 'fabric-loom' version '1.15.5'
 }
 
 version = mod_version
@@ -20,4 +20,13 @@ dependencies {
     mappings loom.officialMojangMappings()
     // Jade API (compile-only for common Jade compat code)
     compileOnly "maven.modrinth:jade:${jade_fabric_version}"
+}
+
+// The common module is source-only in this repository. Its sources are compiled
+// by the Fabric and NeoForge projects via shared source sets, so the standalone
+// common lifecycle tasks should not participate in root builds.
+["compileJava", "processResources", "classes", "jar", "sourcesJar", "assemble", "build", "check", "test", "processIncludeJars", "remapJar", "remapSourcesJar", "validateAccessWidener"].each { taskName ->
+    tasks.matching { it.name == taskName }.configureEach {
+        enabled = false
+    }
 }

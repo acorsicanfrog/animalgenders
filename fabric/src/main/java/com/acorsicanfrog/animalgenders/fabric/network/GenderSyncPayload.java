@@ -6,12 +6,12 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public record GenderSyncPayload(int entityId, String genderName) implements CustomPacketPayload
 {
     public static final CustomPacketPayload.Type<GenderSyncPayload> TYPE =
-            new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "gender_sync"));
+            new CustomPacketPayload.Type<>(Identifier.fromNamespaceAndPath(Constants.MOD_ID, "gender_sync"));
 
     public static final StreamCodec<FriendlyByteBuf, GenderSyncPayload> STREAM_CODEC =
             StreamCodec.composite(
