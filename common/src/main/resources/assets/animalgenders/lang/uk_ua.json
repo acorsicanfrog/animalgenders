@@ -1,0 +1,12 @@
+{
+  "gender.animalgenders.male": "Самець",
+  "gender.animalgenders.female": "Самка",
+  "gender.animalgenders.unknown": "Невідомо",
+  
+  "message.animalgenders.milking_male_impossible": "Самців не можна доїти.",
+
+  "config.jade.plugin_animalgenders.entity_gender": "Animal Gender",
+  
+  "modmenu.descriptionTranslation.animalgenders": "Додає стать до всіх тварин Minecraft. Тепер при розведенні враховується стать: можливе поєднання лише самців та самок. Самки мають такі ексклюзивні здібності, як відкладання яєць і доїння.",
+  "fml.menu.mods.info.description.animalgenders": "Додає стать до всіх тварин Minecraft. Тепер при розведенні враховується стать: можливе поєднання лише самців та самок. Самки мають такі ексклюзивні здібності, як відкладання яєць і доїння."
+}
