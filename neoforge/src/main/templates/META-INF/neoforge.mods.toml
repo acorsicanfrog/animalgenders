@@ -31,7 +31,7 @@ config="mixins.animalgenders-common.json"
 [[dependencies.${mod_id}]]
     modId="neoforge"
     type="required"
-    versionRange="[${neo_version},)"
+    versionRange="${neo_version_range}" #mandatory
     ordering="NONE"
     side="BOTH"
 
